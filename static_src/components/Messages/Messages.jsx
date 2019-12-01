@@ -3,10 +3,15 @@ import Message from '../Message/Message.jsx'
 
 export class Messages extends Component {
     render() {
+        const list = {
+            display: 'flex',
+            flexDirection: 'column',
+            width: '600px'
+        }
         return (
-            <ul>
-                {this.props.messages.map((message) => (
-                    <Message text={message}/>
+            <ul style={list}>
+                {this.props.messages.map((message, index) => (
+                    <Message key={index} text={message}/>
                 ))}
             </ul>
         )

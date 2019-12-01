@@ -1,27 +1,34 @@
 import React, { Component } from 'react';
 
 export class FormInput extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: ''
-        };
-        this.onChange = this.onChange.bind(this);
-        this.submitText = this.submitText.bind(this);
+    state = {
+        value: '',
+        author: ''
+    };
+
+    handleChange = (e) => {
+        this.setState({
+            [e.target.name] : e.target.value
+        })
     }
 
-    onChange(e) {this.setState({[e.target.name] : e.target.value})}
-
-    submitText(e) {
+    submitText = (e) => {
         e.preventDefault();
-        this.props.addMessage(this.state.value);
+        this.props.addMessage(this.state.value, this.state.author);
         this.setState({ value: '' });
     }
 
     render() {
         return (
             <form onSubmit={this.submitText}>
-                <input onChange={this.onChange} value={this.state.value} type="text" name="value"/>
+                <div>
+                    Автор
+                    <input onChange={this.handleChange} value={this.state.author} type="text" name="author"/>
+                </div>
+                <div>
+                    Сообщение
+                    <input onChange={this.handleChange} value={this.state.value} type="text" name="value"/>
+                </div>
                 <button type="submit">Ответить</button>
             </form>
         )

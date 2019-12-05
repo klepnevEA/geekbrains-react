@@ -20,7 +20,7 @@ class Layout extends Component {
     if(value) {
       this.setState({
         messages: 
-        [{text: value, author: 'me'} , ...this.state.messages],
+        [ ...this.state.messages, {text: value, author: 'me'} ],
         flag: true
       });
     }
@@ -30,7 +30,7 @@ class Layout extends Component {
     const answer = this.getRandomFloat(1, (this.state.botAnsvers.length))
     const botAnsver = this.state.botAnsvers[answer] 
     this.setState({
-      messages: [{ text: `Привет, ${this.state.authorName}! ${botAnsver}`, author: 'bot'}, ...this.state.messages ],
+      messages: [ ...this.state.messages, { text: `Привет, ${this.state.authorName}! ${botAnsver}`, author: 'bot'} ],
       flag: false
     })
   }
@@ -51,7 +51,7 @@ class Layout extends Component {
     return (
       <div className="wrapper">
         <Header />
-        <div className="layout-container">
+        <div className="container">
           <ChatList />
           <MessageField addMessage={this.addMessage} addAuthor={this.addAuthor} messagesList={this.state.messages}/>  
         </div>

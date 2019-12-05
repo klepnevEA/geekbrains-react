@@ -1,0 +1,21 @@
+.form-input {
+    padding-top: 20px;
+}
+
+
+.form-input__label {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+}
+
+.form-input__row {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.form-input__buttons {
+    display: flex;
+    justify-content: flex-end;
+    flex: 0 0 auto;
+}

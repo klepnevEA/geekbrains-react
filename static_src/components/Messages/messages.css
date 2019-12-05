@@ -1,3 +1,9 @@
 .messages-list {
-    background-color: red;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    background-color: #eee;
+    border-radius: 10px;
+    padding: 10px;
+    flex: 1;
 }

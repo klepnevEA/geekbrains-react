@@ -1,0 +1,11 @@
+.chat-list {
+    background-color: #ccc;
+    padding: 20px;
+    width: 200px;
+    flex: 0 0 auto;
+}
+
+.chat-list__link {
+    color: #000;
+    font-weight: bold;
+}

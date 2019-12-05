@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
-import FormInput from './components/FormInput/FormInput';
-import Messages from './components/Messages/Messages';
+import Header from './components/Header/Header'
+import ChatList from  './components/ChatList/ChatList'
+import MessageField from  './components/MessageField/MessageField'
 
-class App extends Component {
+class Layout extends Component {
   state = {
     messages: [],
-    author: false,
+    flag: false,
     authorName: '',
     botAnsvers: ['Рад тебя видеть', 'Как дела?', 'Как учеба?', 'Люблю тебя', 'Ненавижу тебя', 'Иди в жопу!!!', 'Хочу от тебя дедей!'] 
   };
@@ -19,19 +20,18 @@ class App extends Component {
     if(value) {
       this.setState({
         messages: 
-        [value , ...this.state.messages],
-        author: true
+        [{text: value, author: 'me'} , ...this.state.messages],
+        flag: true
       });
     }
-    
   }
 
   botAnsver = () => {
     const answer = this.getRandomFloat(1, (this.state.botAnsvers.length))
     const botAnsver = this.state.botAnsvers[answer] 
     this.setState({
-      messages: [`Бот: Привет, ${this.state.authorName}! ${botAnsver}`, ...this.state.messages ],
-      author: false
+      messages: [{ text: `Привет, ${this.state.authorName}! ${botAnsver}`, author: 'bot'}, ...this.state.messages ],
+      flag: false
     })
   }
 
@@ -40,7 +40,7 @@ class App extends Component {
   }
 
   componentDidUpdate() {
-    if(this.state.author) {
+    if(this.state.flag) {
       setTimeout(() => {
         this.botAnsver()
       }, 1000 )
@@ -49,12 +49,15 @@ class App extends Component {
   
   render() {
     return (
-        <div className="App">
-            <FormInput addMessage={this.addMessage} addAuthor={this.addAuthor}/>
-            <Messages messages={this.state.messages}/>
+      <div className="wrapper">
+        <Header />
+        <div className="layout-container">
+          <ChatList />
+          <MessageField addMessage={this.addMessage} addAuthor={this.addAuthor} messagesList={this.state.messages}/>  
         </div>
+      </div>
     );
   }
 }
 
-export default App;
+export default Layout;

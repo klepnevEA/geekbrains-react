@@ -1,8 +1,14 @@
 .chat-list {
+    display: flex;
+    flex-direction: column;
     background-color: #ccc;
     padding: 20px;
     width: 200px;
     flex: 0 0 auto;
+}
+
+.chat-list__list {
+    flex: 1 1 auto;
 }
 
 .chat-list__link {

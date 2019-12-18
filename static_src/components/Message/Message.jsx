@@ -9,7 +9,7 @@ export class Message extends Component {
     }
 
     componentDidMount() {
-        if(this.props.message.author === 'me') {
+        if(this.props.sender === 'me') {
             this.setState({
                 classes: [...this.state.classes, 'message--me' ]
             })
@@ -22,10 +22,13 @@ export class Message extends Component {
     render() {
         
         return (
-            <li 
+            <li
                 className={this.state.classes.join(' ')}
             >
-                {this.props.message.text}
+                {this.props.text}
+                <a href="#" 
+                    className="message__dell">
+                </a>
             </li>
         )
     }

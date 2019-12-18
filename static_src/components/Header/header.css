@@ -9,4 +9,13 @@
 .header__container {
     justify-content: center;
     align-items: center;
+    position: relative;
+}
+
+.header__login {
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    color: #fff;
+    transform: translate(0, -50%);
 }

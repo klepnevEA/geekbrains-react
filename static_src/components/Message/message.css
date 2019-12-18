@@ -1,15 +1,28 @@
 .message {
+    position: relative;
     padding: 10px;
     background-color: #ccff99;
     align-self: flex-end;
     margin-bottom: 5px;
-    border-radius: 5px 5px 0 5px;
+    border-radius: 20px 20px 0 20px;
     border: 1px solid #ccc;
 }
 
 .message--bot {
     background-color: #fff;
     align-self: flex-start;
-    border-radius: 5px 5px 5px 0;
+    border-radius: 20px 20px 20px 0;
     border: 1px solid #ccc;
+}
+
+.message__dell {
+    position: absolute;
+    top: -20px;
+    right: 0;
+    width: 15px;
+    height: 15px;
+}
+
+.MuiSvgIcon-root {
+    width: 100% !important;
 }

@@ -14,8 +14,8 @@ module.exports = {
 	resolve: {
 		modules: [`${__dirname}/static_src`, 'node_modules'],
 		extensions: ['.js', '.jsx'],
-    },
-    
+	},
+	devtool: 'cheap-inline-module-source-map',
     watch: process.argv[process.argv.length - 1] === 'development',
 
 	module: {

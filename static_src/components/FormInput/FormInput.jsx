@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { TextField, Fab }  from '@material-ui/core'
-import Send from '@material-ui/icons/Send';
+import Send from '@material-ui/icons/Send'
 import './forminput.css'
 
 export class FormInput extends Component {
 	state = {
-		value: '',
-		author: '',
+		value: ''
 	};
 
 	textInput = React.createRef();
@@ -19,7 +18,7 @@ export class FormInput extends Component {
 
 	submitText = e => {
 		e.preventDefault();
-		this.props.addMessage(this.state.value, this.state.author);
+		this.props.addMessage(this.state.value);
 		this.setState({ value: '' });
 	};
 
@@ -30,12 +29,6 @@ export class FormInput extends Component {
 	render() {
 		return (
 			<form className="form-input" onSubmit={this.submitText}>
-                <div className="form-input__row">
-                    <label className="form-input__label">
-                        Автор
-                        <TextField onChange={this.handleChange} value={this.state.author} type="text" name="author" />
-                    </label>
-				</div>
                 <div className="form-input__row">
                     <label className="form-input__label">
                         Сообщение

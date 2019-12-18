@@ -12,7 +12,7 @@ export class MessageField extends Component {
 					messagesList={this.props.messagesList}
 					chatId={this.props.chatId}
 				/>
-				<FormInput addMessage={this.props.addMessage} addAuthor={this.props.addAuthor} />
+				<FormInput name="Сообщение" addMessage={this.props.addMessage} addAuthor={this.props.addAuthor} />
 			</div>
 		);
 	}

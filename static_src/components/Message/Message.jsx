@@ -9,7 +9,6 @@ export class Message extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.sender);
         if(this.props.sender === 'me') {
             this.setState({
                 classes: [...this.state.classes, 'message--me' ]

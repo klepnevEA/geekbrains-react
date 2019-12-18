@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import Message from '../Message/Message.jsx'
 import './messages.css'
-import defaultProps from 'prop-types';
-
 
 export class Messages extends Component {
     componentDidUpdate() {

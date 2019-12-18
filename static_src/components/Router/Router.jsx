@@ -14,6 +14,8 @@ export default class Router extends React.Component {
                    <Layout chatId={ 2 } /> } />
                <Route path='/chat/3/' render={ () =>
                    <Layout chatId={ 3 } /> } />
+                <Route path='/login/' render={ () =>
+                    <Layout login={true} /> } />
            </Switch>
        )
    }

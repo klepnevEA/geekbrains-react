@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import Header from './components/Header/Header'
 import ChatList from  './components/ChatList/ChatList'
 import MessageField from  './components/MessageField/MessageField'
+import Login from  './components/Login/Login'
+
 
 class Layout extends Component {
 
@@ -99,19 +101,27 @@ class Layout extends Component {
       <div className="wrapper">
         <Header chatId={ this.props.chatId }/>
         <div className="container">
-          <ChatList
-            addChat={this.addChat}
-            chats={this.state.chats}
-          />
-          <MessageField 
-            dellMessage={this.dellMessage}
-            chatId={this.props.chatId} 
-            addMessage={this.addMessage} 
-            addAuthor={this.addAuthor} 
-            messagesList={this.state.messages} 
-            chats={this.state.chats}
-            />  
-        </div>
+
+          {this.props.login ?
+            <Login /> 
+            : 
+            [
+              <ChatList
+                addChat={this.addChat}
+                chats={this.state.chats}
+              />,
+              <MessageField 
+                dellMessage={this.dellMessage}
+                chatId={this.props.chatId} 
+                addMessage={this.addMessage} 
+                addAuthor={this.addAuthor} 
+                messagesList={this.state.messages} 
+                chats={this.state.chats}
+              /> 
+            ] 
+           }
+
+        </div> 
       </div>
     );
   }

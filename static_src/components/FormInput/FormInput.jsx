@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { TextField, Fab }  from '@material-ui/core'
 import Send from '@material-ui/icons/Send'
 import './forminput.css'
+import PropTypes from 'prop-types'
 
 export class FormInput extends Component {
 	state = {
@@ -31,7 +32,7 @@ export class FormInput extends Component {
 			<form className="form-input" onSubmit={this.submitText}>
                 <div className="form-input__row">
                     <label className="form-input__label">
-                        Сообщение
+                        {this.props.name}
                         <TextField
                             onChange={this.handleChange}
                             value={this.state.value}
@@ -49,5 +50,13 @@ export class FormInput extends Component {
 		);
 	}
 }
+
+FormInput.propTypes = {
+    name: PropTypes.string
+};
+
+FormInput.defaultProps = {
+    name: 'Инпут'
+};
 
 export default FormInput;

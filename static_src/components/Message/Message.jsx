@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './message.css'
-
+import {connect} from 'react-redux'
 export class Message extends Component {
     state = {
         classes: [
@@ -9,7 +9,8 @@ export class Message extends Component {
     }
 
     componentDidMount() {
-        if(this.props.sender === 'me') {
+        const { messages, chatId, chats, messageId } = this.props;
+        if(messages[messageId].sender === 'me') {
             this.setState({
                 classes: [...this.state.classes, 'message--me' ]
             })
@@ -20,12 +21,12 @@ export class Message extends Component {
         }
     }
     render() {
-        
+        const { messages, chatId, messageId } = this.props;
         return (
             <li
                 className={this.state.classes.join(' ')}
             >
-                {this.props.text}
+                {/*{messages[messageId].text}*/}
                 <a href="#" 
                     className="message__dell">
                 </a>
@@ -34,4 +35,17 @@ export class Message extends Component {
     }
 }
 
-export default Message
+function mapStateToProps(state) {
+    return {
+        chats: state.chat.chats,
+        messages: state.chat.messages
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Message)

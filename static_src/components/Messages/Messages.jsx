@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Message from '../Message/Message.jsx'
 import './messages.css'
+import {connect} from 'react-redux'
 
 export class Messages extends Component {
     componentDidUpdate() {
@@ -9,14 +10,18 @@ export class Messages extends Component {
     }
     
     render() {
-        const { messagesList, chatId, chats } = this.props;
+        const { messages, chatId, chats } = this.props;
 
-        const messageElements = chats[chatId].messageList.map((messageId, index) => (
-            <Message
-                key={ index }
-                text={ messagesList[messageId].text }
-                sender={ messagesList[messageId].sender }
-            />));
+        const messageElements = chats[chatId].messageList.map((messageId, index) => {
+            return (
+                <Message
+                    key={ index }
+                    messageId = {messageId}
+                    // text={ messages[messageId].text }
+                    // sender={ messages[messageId].sender }
+                />
+                )
+            });
  
 
         return (
@@ -30,4 +35,18 @@ export class Messages extends Component {
     }
 }
 
-export default Messages
+function mapStateToProps(state) {
+    return {
+        chats: state.chat.chats,
+        messages: state.chat.messages
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Messages)
+

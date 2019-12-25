@@ -8,9 +8,6 @@ export class Header extends Component {
         chatId: PropTypes.number,
     };
  
-    static defaultProps = {
-        chatId: 1,
-    };
     render() {
         return (
             <div className="header">

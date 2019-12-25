@@ -4,7 +4,7 @@ import Header from './components/Header/Header'
 import ChatList from  './components/ChatList/ChatList'
 import MessageField from  './components/MessageField/MessageField'
 import Login from  './components/Login/Login'
-
+import {connect} from 'react-redux'
 
 class Layout extends Component {
 
@@ -16,47 +16,29 @@ class Layout extends Component {
       chatId: 1,
   };
 
-  state = {
-    chats: {
-      1: {title: 'Чат 1', messageList: [1, 3]},
-      2: {title: 'Чат 2', messageList: [2]},
-      3: {title: 'Чат 3', messageList: []},
-    },
+  // addMessage = (message) => {
+  //   if(message) {
+  //     const { messages, chats, input } = this.state;
+  //     const { chatId } = this.props;
+  //     const sender = 'me';
 
-    messages: {
-      1: { text: "Привет!", sender: 'bot' },
-      2: { text: "Здравствуйте!", sender: 'bot' },
-      3: { text: "Здравствуйте!!!!", sender: 'me' },
-    },
-    input: '',
-    flag: false,
-    authorName: 'Вася',
-    botAnsvers: ['Рад тебя видеть', 'Как дела?', 'Как учеба?', 'Люблю тебя', 'Ненавижу тебя', 'Иди в жопу!!!', 'Хочу от тебя дедей!'] 
-  };
+  //     const messageId = Object.keys(messages).length + 1;
 
-  addMessage = (message) => {
-    if(message) {
-      const { messages, chats, input } = this.state;
-      const { chatId } = this.props;
-      const sender = 'me';
-
-      const messageId = Object.keys(messages).length + 1;
-
-      this.setState({
-        messages: {...messages,
-            [messageId]: {text: message, sender: sender}},
-        chats: {...chats,
-            [chatId]: { ...chats[chatId],
-                messageList: [...chats[chatId]['messageList'], messageId]
-            }
-        },
-        flag: true
-    })
-    }
-  }
+  //     this.setState({
+  //       messages: {...messages,
+  //           [messageId]: {text: message, sender: sender}},
+  //       chats: {...chats,
+  //           [chatId]: { ...chats[chatId],
+  //               messageList: [...chats[chatId]['messageList'], messageId]
+  //           }
+  //       },
+  //       flag: true
+  //   })
+  //   }
+  // }
 
   botAnsver = () => {
-    const { messages, chats, input } = this.state;
+    const { messages, chats, input, flag } = this.state;
     const { chatId } = this.props;
     const answer = this.getRandomFloat(1, (this.state.botAnsvers.length))
     const botAnsver = this.state.botAnsvers[answer];
@@ -76,25 +58,20 @@ class Layout extends Component {
     })
   }
 
-  addChat = () => {
-    const { chats } = this.state;
-    const chatsId = Object.keys(chats).length + 1;
-    this.setState({
-      chats: {...chats, [chatsId]: {'title': 'Чат ' +  chatsId ,  messageList: [] }},
-    })
-  }
-
   getRandomFloat = (min, max) => {
     return Math.floor(Math.random() * (max - min) + min)
   }
 
   componentDidUpdate() {
-    if(this.state.flag) {
-      setTimeout(() => {
-        this.botAnsver()
-      }, 1000 )
-    }
+    console.log('!!!');
+    // if(this.state.flag) {
+    //   setTimeout(() => {
+    //     this.botAnsver()
+    //   }, 1000 )
+    // }
   }
+
+  
   
   render() {
     return (
@@ -107,16 +84,13 @@ class Layout extends Component {
             : 
             [
               <ChatList
-                addChat={this.addChat}
-                chats={this.state.chats}
+                key={1}
               />,
               <MessageField 
-                dellMessage={this.dellMessage}
+                key={2}
                 chatId={this.props.chatId} 
                 addMessage={this.addMessage} 
                 addAuthor={this.addAuthor} 
-                messagesList={this.state.messages} 
-                chats={this.state.chats}
               /> 
             ] 
            }
@@ -127,4 +101,17 @@ class Layout extends Component {
   }
 }
 
-export default Layout;
+function mapStateToProps(state) {
+  return {
+      chats: state.chat.chats,
+      flag: state.chat.flag
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+      
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Layout)

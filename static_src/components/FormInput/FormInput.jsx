@@ -3,6 +3,7 @@ import { TextField, Fab }  from '@material-ui/core'
 import Send from '@material-ui/icons/Send'
 import './forminput.css'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
 
 export class FormInput extends Component {
 	state = {
@@ -17,9 +18,9 @@ export class FormInput extends Component {
 		});
 	};
 
-	submitText = e => {
-		e.preventDefault();
-		this.props.addMessage(this.state.value);
+	submitText = message => {
+		event.preventDefault();
+		this.props.addMessage(message);
 		this.setState({ value: '' });
 	};
 
@@ -29,7 +30,7 @@ export class FormInput extends Component {
 
 	render() {
 		return (
-			<form className="form-input" onSubmit={this.submitText}>
+			<form className="form-input" onSubmit={() => this.submitText(this.state.value)}>
                 <div className="form-input__row">
                     <label className="form-input__label">
                         {this.props.name}
@@ -59,4 +60,20 @@ FormInput.defaultProps = {
     name: 'Инпут'
 };
 
-export default FormInput;
+function mapStateToProps(state) {
+    return {
+        chats: state.chat.chats,
+        messages: state.chat.messages
+    }
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        addMessage: (message) => dispatch({
+			type: 'ADD-MESSAGE',
+			payload: message
+		})
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FormInput)
